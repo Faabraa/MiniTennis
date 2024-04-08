@@ -7,11 +7,11 @@ public class Finestra {
     /**
      * Constructor que crea un objecte finestra
      */
-    public Finestra(){
+    public Finestra(Game2 game){
         //Declaracio de la finestra amb el nom
-        JFrame jf=new JFrame("Retro Mini Tenis");
+        JFrame jf = new JFrame("Retro Mini Tenis");
         //Coge el lienzo con los objetos
-        jf.add(new Game());
+        jf.add(game);
         //Longitud y amplada
         jf.setSize(500,500);
         //Si es pot veure o no(Si no es posa no es pot veure la finestra)
