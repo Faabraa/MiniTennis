@@ -10,6 +10,8 @@ public class Finestra {
     public Finestra(){
         //Declaracio de la finestra amb el nom
         JFrame jf=new JFrame("Retro Mini Tenis");
+        //Coge el lienzo con los objetos
+        jf.add(new Game());
         //Longitud y amplada
         jf.setSize(500,500);
         //Si es pot veure o no(Si no es posa no es pot veure la finestra)
