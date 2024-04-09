@@ -25,17 +25,18 @@ public class Bola {
         boolean changeDirection = true;
         //Els if limiten les voreres del llenç
         if (x + xa < 0)
-            xa = 1;
-        if (x + xa > game.getWidth() - DIAMETER)
-            xa = -1;
-        if (y + ya < 0)
-            ya = 1;
-        if (y + ya > game.getHeight() - DIAMETER)
+            xa = game.speed;
+        else if (x + xa > game.getWidth() - DIAMETER)
+            xa = -game.speed;
+        else if (y + ya < 0)
+            ya = game.speed;
+        else if (y + ya > game.getHeight() - DIAMETER)
             game.gameOver();
-        if (collision()){
+        else if (collision()){
             ya = -1;
             y = game.racquet.getTopY() - DIAMETER;
-        }
+            game.speed++;
+        } else changeDirection = false;
         x = x + xa;
         y = y + ya;
     }
