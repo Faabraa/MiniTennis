@@ -11,10 +11,12 @@ public class Game extends JPanel {
     Bola bola = new Bola(this);
     Racquet racquet = new Racquet(this);
     int speed = 1;
-    Contador contador = new Contador();
+    ContadorPuntuacio contadorPuntuacio = new ContadorPuntuacio();
+    ContadorNivell contadorNivell = new ContadorNivell();
 
     public Game() {
-        contador.startTimer();
+        contadorPuntuacio.startTimer();
+        contadorNivell.startTimerNivell();
         addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -55,10 +57,11 @@ public class Game extends JPanel {
         racquet.paint(g2d);
         g2d.setColor(Color.GRAY);
         g2d.setFont(new Font("Verdana", Font.BOLD, 30));
-        g2d.drawString(String.valueOf(contador.getScore()), 10, 30);
+        g2d.drawString(String.valueOf(contadorPuntuacio.getScore()), 10, 30);
+        g2d.drawString(String.valueOf(contadorNivell.getNivell()), 350, 30);
     }
     public void gameOver() {
-        JOptionPane.showMessageDialog(this, "Your score was: " + contador.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
+        JOptionPane.showMessageDialog(this, "Your score was: " + contadorPuntuacio.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
         System.exit(ABORT);
     }
 

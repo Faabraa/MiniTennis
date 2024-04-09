@@ -8,6 +8,8 @@ public class Bola {
     int y = 0;
     int xa = 1;
     int ya = 1;
+    private ContadorPuntuacio contadorPuntuacio;
+    private ContadorNivell contadorNivell;
     private Game game;
 
     /**
@@ -39,6 +41,7 @@ public class Bola {
         } else changeDirection = false;
         x = x + xa;
         y = y + ya;
+        game.speed = this.game.contadorNivell.getNivell();
     }
     private boolean collision() {
         return game.racquet.getBounds().intersects(getBounds());
