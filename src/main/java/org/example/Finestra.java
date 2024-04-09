@@ -7,7 +7,7 @@ public class Finestra {
     /**
      * Constructor que crea un objecte finestra
      */
-    public Finestra(Game2 game){
+    public Finestra(Game game){
         //Declaracio de la finestra amb el nom
         JFrame jf = new JFrame("Retro Mini Tenis");
         //Coge el lienzo con los objetos
