@@ -7,7 +7,7 @@ public class Bola {
     int y = 0;
     int xa = 1;
     int ya = 1;
-    private final Game game;
+    private Game game;
 
     /**
      * Constructor default
@@ -33,6 +33,11 @@ public class Bola {
         x += xa;
         y += ya;
     }
+
+    /**
+     * Dibuixa
+     * @param g
+     */
     public void paint(Graphics2D g) {
         //Declarem la bola
         g.fillRect(x, y, 30, 30);

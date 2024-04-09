@@ -1,13 +1,59 @@
 package org.example;
 import java.awt.*;
-import javax.swing.JPanel;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.*;
+
 /**
  * Fem una clase amb els imports de la clase JPanel
  */
 public class Game extends JPanel {
-    Bola bola=new Bola(this);
+    Bola bola = new Bola(this);
+    Racquet racquet = new Racquet(this);
+
+    public Game() {
+        addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                racquet.keyReleased(e);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                racquet.keyPressed(e);
+            }
+        });
+        setFocusable(true);
+    }
     private void move(){
         bola.move();
+        racquet.move();
+    }
+
+    /**
+     * Dibuixa
+     * @param g  the <code>Graphics</code> context in which to paint
+     */
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        //Declarem la variable de Graphics2D
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+        //Posem el color negre
+        g2d.setColor(Color.BLACK);
+        //Declarem la bola
+        bola.paint(g2d);
+        racquet.paint(g2d);
+    }
+    public void gameOver() {
+        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+        System.exit(ABORT);
     }
 
     /**
@@ -26,19 +72,6 @@ public class Game extends JPanel {
             Thread.sleep(10);
         }
     }
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        //Declarem la variable de Graphics2D
-        Graphics2D g2d = (Graphics2D) g;
-        //Posem el color negre
-        g2d.setColor(Color.BLACK);
-        //Declarem la bola
-        bola.paint(g2d);
-    }
-
-
     /**
      * Mètode base de dades
      */
