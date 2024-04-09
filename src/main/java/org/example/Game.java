@@ -10,6 +10,11 @@ import javax.swing.*;
 public class Game extends JPanel {
     Bola bola = new Bola(this);
     Racquet racquet = new Racquet(this);
+    int speed = 1;
+
+    private int getScore()  {
+        return speed = -1;
+    }
 
     public Game() {
         addKeyListener(new KeyListener() {
@@ -50,9 +55,12 @@ public class Game extends JPanel {
         //Declarem la bola
         bola.paint(g2d);
         racquet.paint(g2d);
+        g2d.setColor(Color.GRAY);
+        g2d.setFont(new Font("Verdana", Font.BOLD, 30));
+        g2d.drawString(String.valueOf(getScore()), 10, 30);
     }
     public void gameOver() {
-        JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+        JOptionPane.showMessageDialog(this, "Your score is: " + getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
         System.exit(ABORT);
     }
 
