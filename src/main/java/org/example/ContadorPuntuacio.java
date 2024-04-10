@@ -10,6 +10,9 @@ public class ContadorPuntuacio {
         return score;
     }
 
+    /**
+     * Contador que suma 1 punt per mil·lisegon
+     */
     public void startTimer() {
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {

@@ -15,11 +15,18 @@ public class Racquet {
         this.game= game;
     }
 
+    /**
+     * Mou la raqueta
+     */
     public void move() {
         if (x + xa > 0 && x + xa < game.getWidth() - WIDTH)
             x = x + xa;
     }
 
+    /**
+     * Dibuixa la raqueta
+     * @param g
+     */
     public void paint(Graphics2D g) {
         g.fillRect(x, Y, WIDTH,HEIGHT);
     }

@@ -8,8 +8,7 @@ public class Bola {
     int y = 0;
     int xa = 1;
     int ya = 1;
-    private ContadorPuntuacio contadorPuntuacio;
-    private ContadorNivell contadorNivell;
+    private ContadorNivell contadorNivell = new ContadorNivell();
     private Game game;
 
     /**
@@ -21,7 +20,8 @@ public class Bola {
     }
 
     /**
-     * Mou la pilota infinitament
+     * Mou la pilota fins que aquesta toqui el terra i
+     * augmenta la velocitat cada cert temps
      */
     void move()  {
         boolean changeDirection = true;
@@ -37,12 +37,18 @@ public class Bola {
         else if (collision()){
             ya = -1;
             y = game.racquet.getTopY() - DIAMETER;
-            game.speed++;
+        } else if (contadorNivell.getOldNivell() < contadorNivell.getNivell()) {
+            game.speed *= 1.1;
         } else changeDirection = false;
         x = x + xa;
         y = y + ya;
-        game.speed = this.game.contadorNivell.getNivell();
+        game.speed *= this.game.contadorNivell.getNivell();
     }
+
+    /**
+     * Crea una colisió a la raqueta
+     * @return
+     */
     private boolean collision() {
         return game.racquet.getBounds().intersects(getBounds());
     }
@@ -54,6 +60,11 @@ public class Bola {
         //Declarem la bola
         g.fillRect(x, y, DIAMETER,DIAMETER);
     }
+
+    /**
+     * Retorna un objecte de tipus rectangle que indica la posició de la raqueta
+     * @return Objecte
+     */
     public Rectangle getBounds() {
         return new Rectangle(x, y, DIAMETER, DIAMETER);
     }

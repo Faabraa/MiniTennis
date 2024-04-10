@@ -14,6 +14,9 @@ public class Game extends JPanel {
     ContadorPuntuacio contadorPuntuacio = new ContadorPuntuacio();
     ContadorNivell contadorNivell = new ContadorNivell();
 
+    /**
+     * El joc
+     */
     public Game() {
         contadorPuntuacio.startTimer();
         contadorNivell.startTimerNivell();
@@ -34,6 +37,10 @@ public class Game extends JPanel {
         });
         setFocusable(true);
     }
+
+    /**
+     * Moviment de la pilota i raqueta
+     */
     private void move(){
         bola.move();
         racquet.move();
@@ -57,11 +64,17 @@ public class Game extends JPanel {
         racquet.paint(g2d);
         g2d.setColor(Color.GRAY);
         g2d.setFont(new Font("Verdana", Font.BOLD, 30));
+        //Dibuixa a la finestra
         g2d.drawString(String.valueOf(contadorPuntuacio.getScore()), 10, 30);
         g2d.drawString(String.valueOf(contadorNivell.getNivell()), 350, 30);
     }
+
+    /**
+     * Missatge al morir
+     */
     public void gameOver() {
         JOptionPane.showMessageDialog(this, "Your score was: " + contadorPuntuacio.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
+        //Para l'execució de codi al tancar la finestra
         System.exit(ABORT);
     }
 
