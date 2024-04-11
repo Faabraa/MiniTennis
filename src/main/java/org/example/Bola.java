@@ -37,12 +37,10 @@ public class Bola {
         else if (collision()){
             ya = -1;
             y = game.racquet.getTopY() - DIAMETER;
-        } else if (contadorNivell.getOldNivell() < contadorNivell.getNivell()) {
-            game.speed *= 1.1;
-        } else changeDirection = false;
+        }else changeDirection = false;
         x = x + xa;
         y = y + ya;
-        game.speed *= this.game.contadorNivell.getNivell();
+        game.speed = this.game.contadorNivell.getNivell();
     }
 
     /**
