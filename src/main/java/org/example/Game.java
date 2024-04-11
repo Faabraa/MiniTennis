@@ -84,15 +84,23 @@ public class Game extends JPanel {
      * @throws InterruptedException Excepció pel while
      */
     public static void main(String[] args) throws InterruptedException {
-        Game game = new Game();
-        Finestra finestra = new Finestra(game);
-        while (true)    {
-            game.move();
-            //Crida al paint
-            game.repaint();
-            //Dona un descans als fils perque no agafin el mateix recurs a la vegada
-            Thread.sleep(10);
-        }
+            Preguntes preguntes=new Preguntes();
+            while(!Preguntes.isMenuAcabat()){
+                Thread.sleep(10);
+            }
+                Game game = new Game();
+                Finestra finestra = new Finestra(game);
+                while (true)    {
+                    game.move();
+                    //Crida al paint
+                    game.repaint();
+                    //Dona un descans als fils perque no agafin el mateix recurs a la vegada
+                    Thread.sleep(10);
+                }
+
+
+
+
     }
     /**
      * Mètode base de dades
