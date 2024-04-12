@@ -9,55 +9,51 @@ import java.awt.event.ActionListener;
  * Clase del menu principal
  */
 public class Preguntes extends JFrame {
+    public static final int NIVELL_MAXIM = 99;
     //Atributs de la clase com els botons i l'idioma
-    JButton catalaButton = new JButton("Catala");
+    JButton catalaButton = new JButton("Català");
     JButton castellaButton = new JButton("Castellano");
     Container container;
-    private static String idioma = "Catala";
+    private static String idioma = "Català";
     private static String nomUsuari="";
     private static int nivellInicial=0;
     private static boolean menuAcabat=false;
+    private int WIDTH_MENU = 300;
+    private int HEIGHT_MENU = 300;
 
+    /**
+     * Comprova si ja ha acabat la fase del menu
+     * i es pot començar a jugar
+     * @return
+     */
     public static boolean isMenuAcabat() {
         return menuAcabat;
     }
 
-    public static String getIdioma() {
-        return idioma;
-    }
-
+    /**
+     * Getters i setters
+     * @return
+     */
     public int getNivellInicial() {
         return nivellInicial;
     }
-
-    public static String getNomUsuari() {
-        return nomUsuari;
-    }
-
-
-
-    
 
     /**
      * Constructor que fa els botons de idioma
      */
     public Preguntes() {
         super("Idioma");
-
         container = getContentPane();
         setLayout(new FlowLayout());
         add(catalaButton);
         add(castellaButton);
-
         catalaButton.addActionListener(new CatalanListener());
         castellaButton.addActionListener(new CastellanoListener());
 
-        setSize(300, 200);
+        setSize(WIDTH_MENU, HEIGHT_MENU);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-
-
 
     /**
      * Listener del boto de catala que fa trucades als altres menus com el de nom d'usuari i el de nivell inicial
@@ -114,7 +110,7 @@ public class Preguntes extends JFrame {
         if(idioma.equals("Castellano")){
             JOptionPane.showMessageDialog(this, "El juego estara en " + idioma, "Idioma", JOptionPane.PLAIN_MESSAGE);
         }else{
-            JOptionPane.showMessageDialog(this, "El joc estara en " + idioma, "Idioma", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El joc estarà en " + idioma, "Idioma", JOptionPane.PLAIN_MESSAGE);
         }
 
 
@@ -148,7 +144,7 @@ public class Preguntes extends JFrame {
                     String input = JOptionPane.showInputDialog("Introdueix el nivell inicial(El nivell final es 99):");
 
                     nivellInicial = Integer.parseInt(input);
-                    if(nivellInicial<99){
+                    if(nivellInicial< NIVELL_MAXIM){
                         condicio=true;
                     }else{
                         JOptionPane.showMessageDialog(null,"Has de posar un nivell valid","Error",JOptionPane.ERROR_MESSAGE);
@@ -158,7 +154,7 @@ public class Preguntes extends JFrame {
                     String input = JOptionPane.showInputDialog("Introduce el nivel inicial(El nivel final es 99):");
 
                     nivellInicial = Integer.parseInt(input);
-                    if(nivellInicial<99){
+                    if(nivellInicial<NIVELL_MAXIM){
                         condicio=true;
                     }else{
                         JOptionPane.showMessageDialog(null,"Tienes que introducir una nivel valido","Error",JOptionPane.ERROR_MESSAGE);

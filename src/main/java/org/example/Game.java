@@ -9,10 +9,9 @@ import javax.swing.*;
  * Fem una clase amb els imports de la clase JPanel
  */
 public class Game extends JPanel {
+    public static final int FONTSIZE = 30;
     Bola bola = new Bola(this);
     Racquet racquet = new Racquet(this);
-
-    static Preguntes menu = new Preguntes();
     ContadorPuntuacio contadorPuntuacio = new ContadorPuntuacio();
     static ContadorNivell contadorNivell = new ContadorNivell();
     public static double speed = contadorNivell.velocitat.speed;
@@ -49,7 +48,7 @@ public class Game extends JPanel {
     }
 
     /**
-     * Dibuixa
+     * Dibuixa els marcadors
      *
      * @param g the <code>Graphics</code> context in which to paint
      */
@@ -66,7 +65,7 @@ public class Game extends JPanel {
         bola.paint(g2d);
         racquet.paint(g2d);
         g2d.setColor(Color.GRAY);
-        g2d.setFont(new Font("Verdana", Font.BOLD, 30));
+        g2d.setFont(new Font("Verdana", Font.BOLD, FONTSIZE));
         //Dibuixa a la finestra
         g2d.drawString(String.valueOf(contadorPuntuacio.getScore()), 10, 30);
         g2d.drawString(String.valueOf(contadorNivell.getNivell()), 350, 30);
@@ -94,8 +93,7 @@ public class Game extends JPanel {
         }
         //Actualitza el nivell a la pantalla
         contadorNivell.setNivell(preguntes.getNivellInicial());
-        //Posa la velocitat corresponent segons el
-
+        //Posa la velocitat corresponent segons el nivell
         contadorNivell.velocitat.VelocitatInicial();
         speed=contadorNivell.velocitat.speed;
         Game game = new Game();

@@ -5,7 +5,6 @@ import java.util.TimerTask;
 
 public class ContadorPuntuacio {
     private int score = 0;
-
     public int getScore() {
         return score;
     }

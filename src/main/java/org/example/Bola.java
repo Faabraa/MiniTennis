@@ -8,7 +8,6 @@ public class Bola {
     double y = 0;
     double xa = 1;
     double ya = 1;
-    private ContadorNivell contadorNivell = new ContadorNivell();
     private Game game;
 
 
@@ -33,6 +32,7 @@ public class Bola {
             xa = -game.speed;
         else if (y + ya < 0)
             ya = game.speed;
+        //Toca el terra
         else if (y + ya > game.getHeight() - DIAMETER)
             game.gameOver();
         else if (collision()){
@@ -53,11 +53,10 @@ public class Bola {
         return game.racquet.getBounds().intersects(getBounds());
     }
     /**
-     * Dibuixa
+     * Dibuixa la pilota i la posiciona
      * @param g
      */
     public void paint(Graphics2D g) {
-        //Declarem la bola
         g.fillRect((int)x,(int) y, DIAMETER,DIAMETER);
     }
 

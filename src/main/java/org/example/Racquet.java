@@ -24,7 +24,7 @@ public class Racquet {
     }
 
     /**
-     * Dibuixa la raqueta
+     * Dibuixa la raqueta i la posiciona
      * @param g
      */
     public void paint(Graphics2D g) {
