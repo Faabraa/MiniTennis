@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Bola {
     private static final int DIAMETER = 30;
-    double x = 0;
+    double x = 495;
     double y = 0;
     double xa = 1;
     double ya = 1;
