@@ -26,7 +26,6 @@ public class Bola {
      */
     void move()  {
         boolean changeDirection = true;
-
         //Els if limiten les voreres del llenç
         if (x + xa < 0)
             xa = game.speed;

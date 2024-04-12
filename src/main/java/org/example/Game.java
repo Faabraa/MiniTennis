@@ -1,4 +1,5 @@
 package org.example;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -10,14 +11,11 @@ import javax.swing.*;
 public class Game extends JPanel {
     Bola bola = new Bola(this);
     Racquet racquet = new Racquet(this);
-    public double speed = 1;
 
-
-
+    static Preguntes menu = new Preguntes();
     ContadorPuntuacio contadorPuntuacio = new ContadorPuntuacio();
-    ContadorNivell contadorNivell = new ContadorNivell();
-    Velocitat velocitat = new Velocitat();
-
+    static ContadorNivell contadorNivell = new ContadorNivell();
+    public static double speed = contadorNivell.velocitat.speed;
     /**
      * El joc
      */
@@ -45,14 +43,15 @@ public class Game extends JPanel {
     /**
      * Moviment de la pilota i raqueta
      */
-    private void move(){
+    private void move() {
         bola.move();
         racquet.move();
     }
 
     /**
      * Dibuixa
-     * @param g  the <code>Graphics</code> context in which to paint
+     *
+     * @param g the <code>Graphics</code> context in which to paint
      */
     @Override
     public void paint(Graphics g) {
@@ -84,28 +83,36 @@ public class Game extends JPanel {
 
     /**
      * Mètode main
+     *
      * @param args
      * @throws InterruptedException Excepció pel while
      */
     public static void main(String[] args) throws InterruptedException {
-           // Preguntes preguntes=new Preguntes();
-            //while(!Preguntes.isMenuAcabat()){
-              //  Thread.sleep(10);
-            //}
-                Game game = new Game();
-                Finestra finestra = new Finestra(game);
-                while (true)    {
-                    game.move();
-                    //Crida al paint
-                    game.repaint();
-                    //Dona un descans als fils perque no agafin el mateix recurs a la vegada
-                    Thread.sleep(10);
-                }
+        Preguntes preguntes = new Preguntes();
+        while (!Preguntes.isMenuAcabat()) {
+            Thread.sleep(10);
+        }
+        //Actualitza el nivell a la pantalla
+        contadorNivell.setNivell(preguntes.getNivellInicial());
+        //Posa la velocitat corresponent segons el
+
+        contadorNivell.velocitat.VelocitatInicial();
+        speed=contadorNivell.velocitat.speed;
+        Game game = new Game();
+        Finestra finestra = new Finestra(game);
+        while (true) {
+            game.move();
+            //Crida al paint
+            game.repaint();
+            //Dona un descans als fils perque no agafin el mateix recurs a la vegada
+            Thread.sleep(10);
+        }
     }
+
     /**
      * Mètode base de dades
      */
-    public void baseDeDades()   {
+    public void baseDeDades() {
 
     }
 }

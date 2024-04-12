@@ -11,6 +11,10 @@ public class ContadorNivell {
         return nivell;
     }
 
+    public void setNivell(int nivell) {
+        this.nivell = nivell;
+    }
+
     /**
      * Contador per augmentar el nivell cada SEGONS_PER_NIVELL mil·lisegons
      */

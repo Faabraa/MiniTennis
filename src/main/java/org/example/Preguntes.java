@@ -26,7 +26,7 @@ public class Preguntes extends JFrame {
         return idioma;
     }
 
-    public static int getNivellInicial() {
+    public int getNivellInicial() {
         return nivellInicial;
     }
 
@@ -125,7 +125,6 @@ public class Preguntes extends JFrame {
      * @param idioma
      */
     private void preguntarNomUsuari(String idioma) {
-
         if (idioma.equals("Catala")) {
             nomUsuari = JOptionPane.showInputDialog(this, "Introdueix el teu nom d'usuari:", "Nombre de usuario", JOptionPane.QUESTION_MESSAGE);
             JOptionPane.showMessageDialog(this, "Benvingut, " + nomUsuari , "Nom Usuari", JOptionPane.INFORMATION_MESSAGE);
