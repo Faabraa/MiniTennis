@@ -4,12 +4,13 @@ import java.awt.*;
 
 public class Bola {
     private static final int DIAMETER = 30;
-    int x = 0;
-    int y = 0;
-    int xa = 1;
-    int ya = 1;
+    double x = 0;
+    double y = 0;
+    double xa = 1;
+    double ya = 1;
     private ContadorNivell contadorNivell = new ContadorNivell();
     private Game game;
+
 
     /**
      * Constructor default
@@ -25,6 +26,7 @@ public class Bola {
      */
     void move()  {
         boolean changeDirection = true;
+
         //Els if limiten les voreres del llenç
         if (x + xa < 0)
             xa = game.speed;
@@ -40,7 +42,8 @@ public class Bola {
         }else changeDirection = false;
         x = x + xa;
         y = y + ya;
-        game.speed = this.game.contadorNivell.getNivell();
+        game.speed=this.game.contadorNivell.velocitat.getSpeed();
+
     }
 
     /**
@@ -56,7 +59,7 @@ public class Bola {
      */
     public void paint(Graphics2D g) {
         //Declarem la bola
-        g.fillRect(x, y, DIAMETER,DIAMETER);
+        g.fillRect((int)x,(int) y, DIAMETER,DIAMETER);
     }
 
     /**
@@ -64,6 +67,6 @@ public class Bola {
      * @return Objecte
      */
     public Rectangle getBounds() {
-        return new Rectangle(x, y, DIAMETER, DIAMETER);
+        return new Rectangle((int) x,(int) y, DIAMETER, DIAMETER);
     }
 }

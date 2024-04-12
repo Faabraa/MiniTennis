@@ -4,18 +4,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ContadorNivell {
+    public Velocitat velocitat = new Velocitat();
     private int nivell = 0;
     private static final int SEGONS_PER_NIVELL = 20000;
-    private int oldNivell = 0;
     public int getNivell() {
         return nivell;
-    }
-    public int getOldNivell() {
-        return oldNivell;
-    }
-
-    public void setOldNivell(int oldNivell) {
-        this.oldNivell = oldNivell;
     }
 
     /**
@@ -26,8 +19,11 @@ public class ContadorNivell {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                setOldNivell(nivell);
                 incrementNivell();
+                if (nivell > 1) {
+                    velocitat.incrementarVelocitat();
+
+                }
             }
         };
         //S'executa per cada mil·lisegon
