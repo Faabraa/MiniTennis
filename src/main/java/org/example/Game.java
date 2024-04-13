@@ -18,6 +18,7 @@ public class Game extends JPanel {
     Racquet racquet = new Racquet(this);
     ContadorPuntuacio contadorPuntuacio = new ContadorPuntuacio();
     static ContadorNivell contadorNivell = new ContadorNivell();
+    Obstacle obstacle = new Obstacle(this);
     public static double speed = contadorNivell.velocitat.speed;
     /**
      * El joc
@@ -49,6 +50,8 @@ public class Game extends JPanel {
     private void move() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         bola.move();
         racquet.move();
+        obstacle.move();
+        obstacle.checkCollisionWithBall();
     }
 
     /**
@@ -68,6 +71,7 @@ public class Game extends JPanel {
         //Declarem la bola
         bola.paint(g2d);
         racquet.paint(g2d);
+        obstacle.paintComponent(g2d);
         g2d.setColor(Color.GRAY);
         g2d.setFont(new Font("Verdana", Font.BOLD, FONTSIZE));
         //Dibuixa a la finestra
@@ -110,6 +114,7 @@ public class Game extends JPanel {
                 sonido.reproducir();
             }
             game.move();
+
             //Crida al paint
             game.repaint();
             //Dona un descans als fils perque no agafin el mateix recurs a la vegada

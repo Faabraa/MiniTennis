@@ -56,7 +56,6 @@ public class Bola {
             y = game.racquet.getTopY() - DIAMETER;
             sonido.cargarSonido("src/sounds/raqueta.wav");
             sonido.reproducir();
-
         }else changeDirection = false;
         x = x + xa;
         y = y + ya;
@@ -69,7 +68,6 @@ public class Bola {
      * @return
      */
     private boolean collision() {
-
         return game.racquet.getBounds().intersects(getBounds());
     }
     /**
