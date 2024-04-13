@@ -1,14 +1,18 @@
 package org.example;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * Clase del menu principal
  */
 public class Preguntes extends JFrame {
+
     public static final int NIVELL_MAXIM = 99;
     //Atributs de la clase com els botons i l'idioma
     JButton catalaButton = new JButton("Català");
@@ -84,6 +88,7 @@ public class Preguntes extends JFrame {
     class CastellanoListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             idioma = "Castellano";
+
             //mostra l'idioma seleccionat segons l'idioma
             mostrarMissatgeIdioma(idioma);
             //Tanca la finestra
@@ -122,7 +127,7 @@ public class Preguntes extends JFrame {
      */
     private void preguntarNomUsuari(String idioma) {
         if (idioma.equals("Catala")) {
-            nomUsuari = JOptionPane.showInputDialog(this, "Introdueix el teu nom d'usuari:", "Nombre de usuario", JOptionPane.QUESTION_MESSAGE);
+            nomUsuari = JOptionPane.showInputDialog(this, "Introdueix el teu nom d'usuari:", "Nom d'usuari", JOptionPane.QUESTION_MESSAGE);
             JOptionPane.showMessageDialog(this, "Benvingut, " + nomUsuari , "Nom Usuari", JOptionPane.INFORMATION_MESSAGE);
         } else {
             nomUsuari = JOptionPane.showInputDialog(this, "Introduce tu nombre de usuario:", "Nombre de usuario", JOptionPane.QUESTION_MESSAGE);

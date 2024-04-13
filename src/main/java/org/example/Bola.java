@@ -1,8 +1,12 @@
 package org.example;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
+import java.io.IOException;
 
 public class Bola {
+    private Sonido sonido=new Sonido();
     private static final int DIAMETER = 30;
     double x = 495;
     double y = 0;
@@ -23,21 +27,36 @@ public class Bola {
      * Mou la pilota fins que aquesta toqui el terra i
      * augmenta la velocitat cada cert temps
      */
-    void move()  {
+    void move() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         boolean changeDirection = true;
         //Els if limiten les voreres del llenç
-        if (x + xa < 0)
+        if (x + xa < 0){
             xa = game.speed;
-        else if (x + xa > game.getWidth() - DIAMETER)
+            sonido.cargarSonido("src/sounds/bola.wav");
+            sonido.reproducir();
+        }
+        else if (x + xa > game.getWidth() - DIAMETER){
             xa = -game.speed;
-        else if (y + ya < 0)
+            sonido.cargarSonido("src/sounds/bola.wav");
+            sonido.reproducir();
+        }
+        else if (y + ya < 0){
             ya = game.speed;
+            sonido.cargarSonido("src/sounds/bola.wav");
+            sonido.reproducir();
+        }
         //Toca el terra
-        else if (y + ya > game.getHeight() - DIAMETER)
+        else if (y + ya > game.getHeight() - DIAMETER){
+            sonido.cargarSonido("src/sounds/gameover.wav");
+            sonido.reproducir();
             game.gameOver();
+        }
         else if (collision()){
             ya = -1;
             y = game.racquet.getTopY() - DIAMETER;
+            sonido.cargarSonido("src/sounds/raqueta.wav");
+            sonido.reproducir();
+
         }else changeDirection = false;
         x = x + xa;
         y = y + ya;
@@ -50,6 +69,7 @@ public class Bola {
      * @return
      */
     private boolean collision() {
+
         return game.racquet.getBounds().intersects(getBounds());
     }
     /**

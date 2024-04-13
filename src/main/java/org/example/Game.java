@@ -3,12 +3,16 @@ package org.example;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 /**
  * Fem una clase amb els imports de la clase JPanel
  */
 public class Game extends JPanel {
+
     public static final int FONTSIZE = 30;
     Bola bola = new Bola(this);
     Racquet racquet = new Racquet(this);
@@ -42,7 +46,7 @@ public class Game extends JPanel {
     /**
      * Moviment de la pilota i raqueta
      */
-    private void move() {
+    private void move() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         bola.move();
         racquet.move();
     }
@@ -86,8 +90,9 @@ public class Game extends JPanel {
      * @param args
      * @throws InterruptedException Excepció pel while
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, UnsupportedAudioFileException, LineUnavailableException, IOException {
         Preguntes preguntes = new Preguntes();
+        Sonido sonido=new Sonido();
         while (!Preguntes.isMenuAcabat()) {
             Thread.sleep(10);
         }
@@ -98,7 +103,12 @@ public class Game extends JPanel {
         speed=contadorNivell.velocitat.speed;
         Game game = new Game();
         Finestra finestra = new Finestra(game);
+        sonido.cargarSonido("src/sounds/MusicaFondo.wav");
+        sonido.reproducir();
         while (true) {
+            if(sonido.clip.getFramePosition()==sonido.clip.getFrameLength()){
+                sonido.reproducir();
+            }
             game.move();
             //Crida al paint
             game.repaint();
