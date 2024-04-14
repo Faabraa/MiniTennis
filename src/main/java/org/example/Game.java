@@ -7,7 +7,9 @@ import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Fem una clase amb els imports de la clase JPanel
@@ -20,7 +22,7 @@ public class Game extends JPanel {
     Racquet racquet = new Racquet(this);
     ContadorPuntuacio contadorPuntuacio = new ContadorPuntuacio();
     static ContadorNivell contadorNivell = new ContadorNivell();
-    Obstacle obstacle = new Obstacle(this);
+    private List<Obstacle> obstacles;
     public static double speed = contadorNivell.velocitat.speed;
     /**
      * El joc
@@ -44,6 +46,23 @@ public class Game extends JPanel {
             }
         });
         setFocusable(true);
+        List<Point> obstaclePositions = new ArrayList<>();
+        obstaclePositions.add(new Point(100, 100));
+        obstaclePositions.add(new Point(300, 200));
+        obstacles = createObstacles(obstaclePositions);
+    }
+
+    /**
+     * Creacio d'obstacles
+     * @param posicio
+     * @return
+     */
+    private List<Obstacle> createObstacles(List<Point> posicio) {
+        List<Obstacle> obstacles = new ArrayList<>();
+        for (Point position : posicio) {
+            obstacles.add(new Obstacle((int) position.getX(), (int) position.getY()));
+        }
+        return obstacles;
     }
 
     /**
@@ -52,8 +71,9 @@ public class Game extends JPanel {
     private void move() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         bola.move();
         racquet.move();
-        obstacle.move();
-        obstacle.checkCollisionWithBall();
+        for (Obstacle obstacle : obstacles) {
+            obstacle.checkCollisionWithBall(bola);
+        }
     }
 
     /**
@@ -73,7 +93,9 @@ public class Game extends JPanel {
         //Declarem la bola
         bola.paint(g2d);
         racquet.paint(g2d);
-        obstacle.paintComponent(g2d);
+        for (Obstacle obstacle : obstacles) {
+            obstacle.paintComponent(g2d);
+        }
         g2d.setColor(Color.GRAY);
         g2d.setFont(new Font("Verdana", Font.BOLD, FONTSIZE));
         //Dibuixa a la finestra
@@ -85,7 +107,7 @@ public class Game extends JPanel {
      * Missatge al morir
      */
     public void gameOver() {
-        try {
+
             JOptionPane.showMessageDialog(this, "Your score was: " + contadorPuntuacio.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
             String usuari = Preguntes.getNomUsuari();
             String idioma = Preguntes.getIdioma();
@@ -96,10 +118,6 @@ public class Game extends JPanel {
             accesDades.insertarDades(usuari, contadorPuntuacio.getScore(), (java.sql.Date) fecha, idioma);
             // Para l'execució de codi al tancar la finestra
             System.exit(ABORT);
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
     }
 
     /**

@@ -7,11 +7,11 @@ import java.io.IOException;
 
 public class Bola {
     private Sonido sonido=new Sonido();
-    private static final int DIAMETER = 30;
+    public final int DIAMETER = 30;
     double x = 495;
     double y = 0;
-    double xa = 1;
-    double ya = 1;
+    public double xa = 1;
+    public double ya = 1;
     private Game game;
 
 

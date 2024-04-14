@@ -1,62 +1,54 @@
 package org.example;
 
-import javax.swing.*;
+import org.example.Bola;
+import org.example.Game;
+
 import java.awt.*;
+import javax.swing.*;
 
 public class Obstacle extends JPanel {
-    private int X = 350;
-    private int HEIGHTSPAWN1 = 175;
-    private final int WIDTH = 40;
-    private final int HEIGHT = 40;
-    private double speed = 1;
+    private static final int WIDTH = 40;
+    private static final int HEIGHT = 40;
+    private int x;
+    private int y;
     private Game game;
 
-    /**
-     * Constructor
-     * @param game
-     */
-    public Obstacle(Game game) {
-        this.game = game;
+    public Obstacle(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    /**
-     * Moviment de l'obstacle
-     */
-    public void move() {
-        if (X + WIDTH >= game.getWidth()) {
-            X -= 1;
-            speed = -speed;
-        } else if (X <= 0) {
-            X += 1;
-            speed = -speed;
-        } else {
-            X += speed;
-        }
-    }
-
-    public Rectangle getBounds() {
-        return new Rectangle(X, HEIGHTSPAWN1, WIDTH, HEIGHT);
-    }
-
-    /**
-     * Llegeix la col·lisió
-     */
-    public void checkCollisionWithBall() {
-        if (game.bola.getBounds().intersects(getBounds())) {
-            game.bola.ya = -game.bola.ya;
-        }
-    }
-
-    /**
-     * Dibuixa
-     * @param g the <code>Graphics</code> object to protect
-     */
-    @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.fillOval(X, HEIGHTSPAWN1, WIDTH, HEIGHT);
+        g2d.fillOval(x, y, WIDTH, HEIGHT);
         g2d.dispose();
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(x, y, WIDTH, HEIGHT);
+    }
+
+    public void checkCollisionWithBall(Bola bola) {
+        Rectangle ballBounds = bola.getBounds();
+        if (ballBounds.intersects(getBounds())) {
+            double ballCenterX = ballBounds.getCenterX();
+            double ballCenterY = ballBounds.getCenterY();
+
+            double obstacleCenterX = x + WIDTH / 2.0;
+            double obstacleCenterY = y + HEIGHT / 2.0;
+
+            double dx = Math.abs(ballCenterX - obstacleCenterX);
+            double dy = Math.abs(ballCenterY - obstacleCenterY);
+
+            if (dx <= (WIDTH / 2.0 + bola.DIAMETER / 2.0) && dy <= (HEIGHT / 2.0 + bola.DIAMETER / 2.0)) {
+                if (dx > dy) {
+                    bola.xa = -bola.xa;
+                } else {
+                    bola.ya = -bola.ya;
+                }
+            }
+        }
     }
 }
