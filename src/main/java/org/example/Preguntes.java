@@ -135,6 +135,14 @@ public class Preguntes extends JFrame {
         }
     }
 
+    public static String getIdioma() {
+        return idioma;
+    }
+
+    public static String getNomUsuari() {
+        return nomUsuari;
+    }
+
     /**
      * Pregunta el nivell inicial
      * @param idioma
@@ -186,7 +194,7 @@ public class Preguntes extends JFrame {
                             "1.Cada 20.000 de puntuacio es subira un nivell\n" +
                             "2.Cada nivell augmenta la velocitat de la pilota\n" +
                             "3.El joc s'acaba quan s'escapa la pilota per darrere d'una raqueta\n", "Normes", JOptionPane.INFORMATION_MESSAGE);
-                            menuAcabat=true;
+            menuAcabat=true;
 
 
         } else {
@@ -195,7 +203,7 @@ public class Preguntes extends JFrame {
                             "1. Cada 20.000 de puntuación se subirá un nivel\n" +
                             "2.Cada nivel aumenta la velocidad de la pelota\n" +
                             "3.El juego se termina cuando se escapa la pelota por detrás de una raqueta\n", "Normas", JOptionPane.INFORMATION_MESSAGE);
-                            menuAcabat=true;
+            menuAcabat=true;
         }
     }
 }

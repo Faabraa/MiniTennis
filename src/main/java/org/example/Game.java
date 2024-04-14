@@ -7,9 +7,11 @@ import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+import java.util.Date;
 
 /**
  * Fem una clase amb els imports de la clase JPanel
+ * @author Grup 3
  */
 public class Game extends JPanel {
 
@@ -83,9 +85,21 @@ public class Game extends JPanel {
      * Missatge al morir
      */
     public void gameOver() {
-        JOptionPane.showMessageDialog(this, "Your score was: " + contadorPuntuacio.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
-        //Para l'execució de codi al tancar la finestra
-        System.exit(ABORT);
+        try {
+            JOptionPane.showMessageDialog(this, "Your score was: " + contadorPuntuacio.getScore(), "Game Over", JOptionPane.YES_NO_OPTION);
+            String usuari = Preguntes.getNomUsuari();
+            String idioma = Preguntes.getIdioma();
+            long miliseconds = System.currentTimeMillis();
+            Date fecha = new Date(miliseconds);
+            AccesDades accesDades = new AccesDades();
+            accesDades.obrirConnexio();
+            accesDades.insertarDades(usuari, contadorPuntuacio.getScore(), (java.sql.Date) fecha, idioma);
+            // Para l'execució de codi al tancar la finestra
+            System.exit(ABORT);
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -120,12 +134,5 @@ public class Game extends JPanel {
             //Dona un descans als fils perque no agafin el mateix recurs a la vegada
             Thread.sleep(10);
         }
-    }
-
-    /**
-     * Mètode base de dades
-     */
-    public void baseDeDades() {
-
     }
 }

@@ -20,6 +20,4 @@ public class Finestra {
         //El que fa la finestra al tancar-la
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-
 }
